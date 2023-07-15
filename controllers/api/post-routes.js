@@ -1,29 +1,22 @@
 const router = require('express').Router();
 const { Post, Comment } = require('../../models');
+const withAuth = require('../../utils/auth');
 
-router.post('/:id', async (req, res) => {
-	if (!req.session.loggedIn) {
-		res.redirect('/login');
-	} else {
-		try {
-			const postData = await Post.findByPk(req.params.id);
-			console.log({
-				text: req.body.text,
+router.post('/:id', withAuth, async (req, res) => {
+	try {
+		const postData = await Post.findByPk(req.params.id);
+
+		if (postData) {
+			const commentData = Comment.create({
+				text: req.body.message,
 				user_id: req.session.userId,
-				post_id: req.params.id
-			});
-			if (postData) {
-				const commentData = Comment.create({
-					text: req.body.message,
-					user_id: req.session.userId,
-					post_id: parseInt(req.params.id)
-				})
-				res.status(200).json(commentData);
-			}
-		} catch (err) {
-			console.log(err);
-			res.status(500).json(err);
+				post_id: parseInt(req.params.id)
+			})
+			res.status(200).json(commentData);
 		}
+	} catch (err) {
+		console.log(err);
+		res.status(500).json(err);
 	}
 })
 
