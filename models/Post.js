@@ -1,7 +1,7 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-class Post extends Model {}
+class Post extends Model { }
 
 Post.init(
   {
@@ -20,12 +20,13 @@ Post.init(
       allowNull: false,
     },
     user_id: {
-        type: DataTypes.INTEGER,
-        references: {
-          model: 'User',
-          key: 'id',
-        },
+      type: DataTypes.INTEGER,
+      references: {
+        model: 'User',
+        key: 'id',
       },
+      onDelete: 'CASCADE'
+    },
   },
   {
     sequelize,
