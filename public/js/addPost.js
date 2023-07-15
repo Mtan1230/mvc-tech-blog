@@ -3,7 +3,7 @@ const addPost = async (e) => {
 
   const title = document.querySelector('#title').value.trim();
   const content = document.querySelector('#content').value.trim();
-  console.log(title, content)
+
   if (title && content) {
     const res = await fetch(`/api/post`, {
       method: 'POST',

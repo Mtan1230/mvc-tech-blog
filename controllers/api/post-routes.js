@@ -19,7 +19,7 @@ router.post('/', withAuth, async (req, res) => {
 		console.log(err);
 		res.status(500).json(err);
 	}
-})
+});
 
 router.post('/:id', withAuth, async (req, res) => {
 	try {
@@ -33,6 +33,37 @@ router.post('/:id', withAuth, async (req, res) => {
 			})
 			res.status(200).json(commentData);
 		}
+	} catch (err) {
+		console.log(err);
+		res.status(500).json(err);
+	}
+});
+
+router.put('/:id', withAuth, async (req, res) => {
+	try {
+		const postData = await Post.findByPk(req.params.id);
+
+		if (postData) {
+			const updatedData = Post.update({
+				title: req.body.title,
+				text: req.body.content
+			}, {
+				where: {id: req.params.id}
+			})
+			res.status(200).json(postData);
+		}
+	} catch (err) {
+		console.log(err);
+		res.status(500).json(err);
+	}
+});
+
+router.delete('/:id', withAuth, async (req, res) => {
+	try {
+			const deletedData = Post.destroy({
+				where: {id: req.params.id}
+			})
+			res.status(200).json(deletedData);
 	} catch (err) {
 		console.log(err);
 		res.status(500).json(err);
