@@ -13,6 +13,7 @@ This is a full-stack blog site, built with MVC architectural structure, using Ha
 - [Usage](#usage)
 - [License](#license)
 - [Contribute](#contribute)
+- [Credits](#credits)
 - [Tests](#tests)
 - [Questions](#questions)  
 
@@ -43,6 +44,10 @@ This project is licensed under the [MIT license](LICENSE).
 ## Contribute  
 
 N/A  
+
+## Credits
+
+Stylesheet is provided by Columbia Coding Bootcamp.
 
 ## Tests  
 
